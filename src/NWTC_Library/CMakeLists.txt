@@ -1,6 +1,14 @@
 
-set(NWTCLIBS_SOURCES NWTC_Library.f90 NWTC_IO.f90 NWTC_Num.f90 NWTC_Aero.f90
-  ModMesh.f90)
+# set(NWTCLIBS_SOURCES NWTC_Library.f90 NWTC_IO.f90 NWTC_Num.f90 NWTC_Aero.f90
+#   ModMesh.f90)
+set(NWTCLIBS_SOURCES
+  DoubPrec.f90
+  NWTC_IO.f90
+  NWTC_Num.f90
+  NWTC_Aero.f90
+  ModMesh.f90
+  NWTC_Library.f90
+)
 
 if (APPLE OR UNIX)
   if (FCNAME MATCHES "gfortran.*")
@@ -12,7 +20,14 @@ elseif (WIN32)
   if (FCNAME MATCHES "gfortran.*")
     list (APPEND NWTCLIBS_SOURCES SysGnuWin.f90)
   elseif (FCNAME MATCHES "ifort.*")
-    list (APPEND NWTCLIBS_SOURCES SysIFV.f90)
+    # list (APPEND NWTCLIBS_SOURCES SysIFV.f90)
+    # 应该是错误的，应该是 SysIVF.f90
+    list (APPEND NWTCLIBS_SOURCES SysIVF.f90)
+  #支持ifx编译器
+  elseif (FCNAME MATCHES "ifx.*")
+    # list (APPEND NWTCLIBS_SOURCES SysIFV.f90)
+    # 应该是错误的，应该是 SysIVF.f90
+    list (APPEND NWTCLIBS_SOURCES SysIVF.f90)
   endif (FCNAME MATCHES "gfortran.*")
 endif (APPLE OR UNIX)
 
