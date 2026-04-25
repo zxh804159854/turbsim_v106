@@ -8,12 +8,22 @@ base source downloadable at the NWTC download portal.
 
 ## Installation instructions
 
+### Vs2015+INTEL_Fortran_2016_U1
 ```
-git clone <repository_url> turbsim # Clone the public repo
-cd turbsim/build                   # Change into the build directory
-ccmake ../src                      # Configure compilation options
-make                               # Build sources 
-make install                       # Install into central directory
+git clone https://github.com/zxh804159854/turbsim_v106
+cd turbsim_v106/build                   # Change into the build directory
+cmake ../src -G "Visual Studio 14 2015" -A x64
+cmake --build . --config Release
+cmake --install . --config Release
+```
+
+### vs2022和oneapi2025
+```
+git clone https://github.com/zxh804159854/turbsim_v106
+cd turbsim_v106/build                   # Change into the build directory
+cmake ../src -G "Visual Studio 17 2022" -T fortran=ifx           # 必须这样子写，否则无法正确识别oneapi
+cmake --build . --config Release                               # Build sources 
+cmake --install . --config Release
 ```
 
 ## Current CMake options
